@@ -7,7 +7,7 @@ namespace BlockHorizons\BlockSniper\brush\type;
 use BlockHorizons\BlockSniper\brush\Type;
 use Generator;
 use pocketmine\block\Air;
-use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\BlockTypeIds;
 use pocketmine\math\Facing;
 
 /*
@@ -19,7 +19,7 @@ class MeltType extends Type{
 	public function fill() : Generator{
 		$blocks = [];
 		foreach($this->mustGetBlocks() as $block){
-			if($block->getId() !== BlockLegacyIds::AIR){
+			if($block->getTypeId() !== BlockTypeIds::AIR){
 				$openSides = 0;
 				foreach(Facing::ALL as $direction){
 					if($this->side($block->getPosition(), $direction) instanceof Air){

@@ -23,15 +23,15 @@ class ReplaceTargetType extends Type{
 	 */
 	public function __construct(BrushProperties $properties, Target $target, Generator $blocks = null){
 		parent::__construct($properties, $target, $blocks);
-		$this->targetBlockId = $this->getBlock($this->target)->getId();
-		$this->targetBlockMeta = $this->getBlock($this->target)->getMeta();
+		$this->targetBlockId = $this->getBlock($this->target)->getTypeId();
+		$this->targetBlockMeta = $this->getBlock($this->target)->getStateId();
 	}
 
 	public function fill() : Generator{
 		$targetBlock = BlockFactory::getInstance()->get($this->targetBlockId, $this->targetBlockMeta);
 		/** @var Block $block */
 		foreach($this->mustGetBlocks() as $block){
-			if($block->getId() === $targetBlock->getId() && $block->getMeta() === $targetBlock->getMeta()){
+			if($block->getTypeId() === $targetBlock->getId() && $block->getStateId() === $targetBlock->getStateId()){
 				yield $block;
 				$this->putBlock($block->getPosition(), $this->randomBrushBlock());
 			}

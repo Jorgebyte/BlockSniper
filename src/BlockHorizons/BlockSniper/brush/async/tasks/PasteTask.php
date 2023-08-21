@@ -11,7 +11,7 @@ use BlockHorizons\BlockSniper\revert\AsyncRevert;
 use BlockHorizons\BlockSniper\session\SessionManager;
 use BlockHorizons\libschematic\Schematic;
 use pocketmine\block\Block;
-use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\BlockTypeIds;
 use pocketmine\math\Vector3;
 use pocketmine\scheduler\AsyncTask;
 use pocketmine\Server;
@@ -74,7 +74,7 @@ class PasteTask extends AsyncTask{
 
 		$processedBlocks = 0;
 		foreach($schematic->blocks() as $block){
-			if($block->getId() === BlockLegacyIds::AIR){
+			if($block->getId() === BlockTypeIds::AIR){
 				continue;
 			}
 			$tempX = $baseWidth + $block->getPosition()->x;

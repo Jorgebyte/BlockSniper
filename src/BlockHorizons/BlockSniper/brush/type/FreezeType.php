@@ -7,7 +7,7 @@ namespace BlockHorizons\BlockSniper\brush\type;
 use BlockHorizons\BlockSniper\brush\Type;
 use Generator;
 use pocketmine\block\BlockFactory;
-use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\BlockTypeIds;
 use pocketmine\block\VanillaBlocks;
 
 /*
@@ -18,22 +18,20 @@ class FreezeType extends Type{
 
 	public function fill() : Generator{
 		foreach($this->mustGetBlocks() as $block){
-			switch($block->getId()){
-				case BlockLegacyIds::WATER:
-				case BlockLegacyIds::FLOWING_WATER:
+			switch($block->getTypeId()){
+				case BlockTypeIds::WATER:
 					yield $block;
 					$this->putBlock($block->getPosition(), VanillaBlocks::ICE());
 					break;
-				case BlockLegacyIds::LAVA:
-				case BlockLegacyIds::FLOWING_LAVA:
+				case BlockTypeIds::LAVA:
 					yield $block;
 					$this->putBlock($block->getPosition(), VanillaBlocks::OBSIDIAN());
 					break;
-				case BlockLegacyIds::FIRE:
+				case BlockTypeIds::FIRE:
 					yield $block;
 					$this->delete($block->getPosition());
 					break;
-				case BlockLegacyIds::ICE:
+				case BlockTypeIds::ICE:
 					yield $block;
 					$this->putBlock($block->getPosition(), VanillaBlocks::PACKED_ICE());
 			}

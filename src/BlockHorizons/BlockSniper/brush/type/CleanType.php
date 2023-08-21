@@ -6,7 +6,7 @@ namespace BlockHorizons\BlockSniper\brush\type;
 
 use BlockHorizons\BlockSniper\brush\Type;
 use Generator;
-use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\BlockTypeIds;
 
 /*
  * Removes all non-natural blocks within the brush radius.
@@ -15,17 +15,17 @@ use pocketmine\block\BlockLegacyIds;
 class CleanType extends Type{
 
 	private const NATURAL_BLOCKS = [
-		BlockLegacyIds::STONE => 0,
-		BlockLegacyIds::GRASS => 0,
-		BlockLegacyIds::DIRT => 0,
-		BlockLegacyIds::GRAVEL => 0,
-		BlockLegacyIds::SAND => 0,
-		BlockLegacyIds::SANDSTONE => 0
+        BlockTypeIds::STONE => 0,
+        BlockTypeIds::GRASS => 0,
+        BlockTypeIds::DIRT => 0,
+        BlockTypeIds::GRAVEL => 0,
+        BlockTypeIds::SAND => 0,
+        BlockTypeIds::SANDSTONE => 0
 	];
 
 	protected function fill() : Generator{
 		foreach($this->mustGetBlocks() as $block){
-			if(!isset(self::NATURAL_BLOCKS[$block->getId()])){
+			if(!isset(self::NATURAL_BLOCKS[$block->getTypeId()])){
 				yield $block;
 				$this->delete($block->getPosition());
 			}

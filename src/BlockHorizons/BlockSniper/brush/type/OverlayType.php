@@ -7,7 +7,7 @@ namespace BlockHorizons\BlockSniper\brush\type;
 use BlockHorizons\BlockSniper\brush\Type;
 use Generator;
 use pocketmine\block\Air;
-use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\BlockTypeIds;
 use pocketmine\math\Facing;
 
 /*
@@ -18,10 +18,10 @@ class OverlayType extends Type{
 
 	public function fill() : Generator{
 		foreach($this->mustGetBlocks() as $block){
-			if($block->getId() !== BlockLegacyIds::AIR){
+			if($block->getTypeId() !== BlockTypeIds::AIR){
 				$valid = true;
 				foreach($this->brushBlocks as $possibleBlock){
-					if($block->getId() === $possibleBlock->getId() && $block->getMeta() === $possibleBlock->getMeta()){
+					if($block->getTypeId() === $possibleBlock->getTypeId() && $block->getStateId() === $possibleBlock->getStateId()){
 						$valid = false;
 					}
 				}
@@ -29,7 +29,7 @@ class OverlayType extends Type{
 					$sideBlock = $this->side($block->getPosition(), $direction);
 					if($valid && $sideBlock instanceof Air){
 						$randomBlock = $this->brushBlocks[array_rand($this->brushBlocks)];
-						if($block->getId() !== $randomBlock->getId() && $block->getMeta() !== $randomBlock->getMeta()){
+						if($block->getTypeId() !== $randomBlock->getTypeId() && $block->getStateId() !== $randomBlock->getStateId()){
 							yield $sideBlock;
 							$this->putBlock($sideBlock->getPosition(), $randomBlock);
 						}

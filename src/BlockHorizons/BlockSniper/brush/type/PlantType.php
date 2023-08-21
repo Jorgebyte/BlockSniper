@@ -19,7 +19,7 @@ class PlantType extends Type{
 		$this->soilBlocks = $this->properties->getSoilBlocks();
 		foreach($this->mustGetBlocks() as $block){
 			foreach($this->soilBlocks as $soil){
-				if($block->getId() !== $soil->getId() || $block->getMeta() !== $soil->getMeta()){
+				if($block->getTypeId() !== $soil->getTypeId() || $block->getStateId() !== $soil->getStateId()){
 					continue;
 				}
 				$blockUp = $this->side($block->getPosition(), Facing::UP);
