@@ -11,7 +11,7 @@ use BlockHorizons\BlockSniper\Loader;
 use BlockHorizons\BlockSniper\ui\window\BrushMenuWindow;
 use BlockHorizons\BlockSniper\ui\window\MainMenuWindow;
 use pocketmine\command\CommandSender;
-use pocketmine\item\ItemIds;
+use pocketmine\item\ItemTypeIds;
 use pocketmine\nbt\tag\StringTag;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat as TF;
@@ -32,13 +32,13 @@ class BrushCommand extends BaseCommand{
 				$sender->sendForm(new MainMenuWindow($this->loader, $sender));
 				break;
 			case $args[0] === "bind":
-				if($item->getId() === ItemIds::AIR){
+				if($item->isNull()){
 					$sender->sendMessage($this->getWarning() . Translation::get(Translation::COMMANDS_BRUSH_NEED_ITEM));
 
 					return;
 				}
 				$brush = $this->loader->config->brushItem->parse();
-				if($item->getId() === $brush->getId() && $item->getMeta() === $brush->getMeta()){
+				if($item->getTypeId() === $brush->getTypeId() && $item->getStateId() === $brush->getStateId()){
 					$sender->sendMessage($this->getWarning() . Translation::get(Translation::COMMANDS_BRUSH_BIND_BRUSH_ITEM));
 
 					return;
